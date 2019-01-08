@@ -13,7 +13,7 @@ export default class FlightList extends React.Component {
       searched: "big",
       origin: '',
       destination: '',
-      flightsNumber: 5,
+      flightsNumber: 10,
     }
 
   }
@@ -22,7 +22,7 @@ export default class FlightList extends React.Component {
   selectedRoute = (data) => {
     if (data) {
       this.setState({ isLoading: true })
-      fetch(`https://api.skypicker.com/flights?flyFrom=${data.origin}&to=${data.destination}&dateFrom=16/11/2018&dateTo=19/11/2018&partner=picky&direct_flights=${data.direct}`)
+      fetch(`https://api.skypicker.com/flights?flyFrom=${data.origin}&to=${data.destination}&dateFrom=${data.date}&dateTo=${data.date}&partner=picky&direct_flights=${data.direct}`)
         .then(resp => resp.json())
         .then(json => {
           this.setState({
@@ -77,11 +77,11 @@ export default class FlightList extends React.Component {
           <div className="title">
             <h1>SkyScammer</h1>
           </div>
-          <DropDown action={this.selectedRoute} showMore={this.showMore} />
+          <DropDown action={this.selectedRoute}/>
         </header>
-        <h3>Displaying flights from {this.state.origin} to {this.state.destination}</h3>
 
-        <div className="flight_list">
+        <div className="flight_list" style={{display: this.state.searched === 'big' ? 'none' : 'block'}}>
+        <h3>Displaying flights from {this.state.origin} to {this.state.destination}</h3>
           <div className="flight-item">
             <div className="flight-prop col-name">Departure time</div>
             <div className="flight-prop col-name">Arrival time</div>
@@ -89,21 +89,23 @@ export default class FlightList extends React.Component {
             <div className="flight-prop col-name">Destination city</div>
             <div className="flight-prop col-name">Price</div>
             <div className="flight-prop col-name">Stopovers</div>
-
           </div>
-          {this.state.flights.slice(0, this.state.flightsNumber).map(
-            flight => <FlightItem
-              departureTime={
-                DateTime.fromMillis(flight.dTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
-              arrivalTime={
-                DateTime.fromMillis(flight.aTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
-              originCity={flight.cityFrom}
-              destinationCity={flight.cityTo}
-              flightPrice={flight.price * 1000}
-              stopOvers={flight.route.length - 1}
-            />
-          )}
-
+          <div className="list">
+            {this.state.flights.slice(0, this.state.flightsNumber).map(
+              (flight, i) => <FlightItem
+                key={i}
+                departureTime={
+                  DateTime.fromMillis(flight.dTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
+                arrivalTime={
+                  DateTime.fromMillis(flight.aTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
+                originCity={flight.cityFrom}
+                destinationCity={flight.cityTo}
+                flightPrice={flight.price * 1000}
+                stopOvers={flight.route.length - 1}
+              />
+            )}
+            <button className="showmore" onClick={this.showMore}>Show more</button>
+          </div>
         </div>
       </>
     )
