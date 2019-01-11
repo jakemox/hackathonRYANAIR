@@ -80,7 +80,9 @@ export default class DropDown extends React.Component {
                     </div>
                 </div>
                 <div className="submit">
-                    <input type="checkbox" name="checkbox" id="direct_flights"/>direct flights only <br></br>
+                    <div className="direct">
+                        <input type="checkbox" name="checkbox" id="direct_flights"/>direct flights only</div>
+                    <br></br>
                     <button className="searchbtn" onClick={this.action}>Search!</button>
                 </div>
             </div>

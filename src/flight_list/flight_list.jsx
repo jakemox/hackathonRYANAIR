@@ -55,13 +55,10 @@ export default class FlightList extends React.Component {
 
           <div className="flight_list">
             <div className="flight-item">
-              <div className="flight-prop col-name">Departure time</div>
-              <div className="flight-prop col-name">Arrival time</div>
-              <div className="flight-prop col-name">Origin city</div>
-              <div className="flight-prop col-name">Destination city</div>
+              <div className="flight-prop col-name">Departs</div>
+              <div className="flight-prop col-name">Arrives</div>
               <div className="flight-prop col-name">Price</div>
-              <div className="flight-prop col-name">Stopovers</div>
-
+              <div className="flight-prop col-name">Stops</div>
             </div>
             <div className="spinner-container">
               <img className="loading-spinner" src="https://www.flightcomp.de/wp-content/plugins/gravityforms/images/spinner.gif" />
@@ -83,23 +80,19 @@ export default class FlightList extends React.Component {
         <div className="flight_list" style={{display: this.state.searched === 'big' ? 'none' : 'block'}}>
         <h3>Displaying flights from {this.state.origin} to {this.state.destination}</h3>
           <div className="flight-item">
-            <div className="flight-prop col-name">Departure time</div>
-            <div className="flight-prop col-name">Arrival time</div>
-            <div className="flight-prop col-name">Origin city</div>
-            <div className="flight-prop col-name">Destination city</div>
+            <div className="flight-prop col-name">Departs</div>
+            <div className="flight-prop col-name">Arrives</div>
             <div className="flight-prop col-name">Price</div>
-            <div className="flight-prop col-name">Stopovers</div>
+            <div className="flight-prop col-name">Stops</div>
           </div>
           <div className="list">
             {this.state.flights.slice(0, this.state.flightsNumber).map(
               (flight, i) => <FlightItem
                 key={i}
                 departureTime={
-                  DateTime.fromMillis(flight.dTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
+                  DateTime.fromMillis(flight.dTime * 1000).toFormat('hh:mm')}
                 arrivalTime={
-                  DateTime.fromMillis(flight.aTime * 1000).toFormat('dd.MM.yyyy hh:mm')}
-                originCity={flight.cityFrom}
-                destinationCity={flight.cityTo}
+                  DateTime.fromMillis(flight.aTime * 1000).toFormat('hh:mm')}
                 flightPrice={flight.price * 1000}
                 stopOvers={flight.route.length - 1}
               />

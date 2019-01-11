@@ -36,7 +36,7 @@ b {
 }
 
 .small {
-  height: 60vh;
+  height: 75vh;
 }
 
 .big {
@@ -59,6 +59,10 @@ b {
   color: white;
 }
 
+.direct {
+  margin-right: 1rem;
+}
+
 .fields {
   display: flex;
   justify-content: space-around;
@@ -76,7 +80,7 @@ b {
 
 button {
   height: 3rem;
-  width: 15rem;
+  width: 25vw;
   background-color: rgb(120, 236, 120);
   border-radius: 5rem;
   color: white;
@@ -97,7 +101,7 @@ button {
 
 select, .date{
   height: 3rem;
-  width: 15rem;
+  width: 25vw;
   border-radius: 5px;
   font-size: 1rem;
   text-align: center;
@@ -149,4 +153,62 @@ select, .date{
 
 .col-name {
   font-weight: bold;
+}
+
+@media screen  and (max-width: 567px) {
+  h1 {
+    font-size: 2rem;
+    margin: 1rem;
+  }
+  
+  .fields {
+    flex-direction: column;
+  }
+
+  .field {
+    font-size: 0.75rem;
+  }
+
+  .search {
+    height: initial;
+  }
+
+  select, .date{
+    width: 80vw;
+    height: 2.5rem;
+  }
+
+  .submit {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  button {
+    width: 80vw;
+  }
+
+  .spinner-container {
+    width: 80vw;
+    left: 10vw;
+  }
+}
+
+@media screen and (max-height: 320px) {
+  h1 {
+    font-size: 3rem;
+    margin: 1rem;
+  }
+
+  select, .date{
+    height: 2.5rem;
+  }
+
+  button {
+    height: 2.5rem;
+  }
+
+  .spinner-container {
+    height: 70vh;
+    top: 15vh;
+  }
 }
